@@ -3,10 +3,11 @@ import botocore
 
 
 class awsClient:
-    BUCKET_NAME = "VIDEO SHARE"
-    ACCESS_KEY = "AKIAIO5FODNN7EXAMPLE"
-    SECRET_KEY = "ABCDEF+c2L7yXeGvUyrPgYsDnWRRC1AYEXAMPLE"
+    BUCKET_NAME = "bitsassignment"
+    ACCESS_KEY = "AKIAIL3LLGV7C4BUGL6A1234"
+    SECRET_KEY = "q5dHkyOx6GRV4MbcD1QVWnrTf8nDO8+cikdHz5iq1234"
     REGION = "us-east-1"
+    CDN_URL = "https://d1vmo6aju6p6pp.cloudfront.net/"
 
     def __init__(self, resource_name):
         self.client = boto3.client(
@@ -29,6 +30,14 @@ class awsClient:
                 raise
 
     def list_files(self):
+        file_list = dict()
         file_objects = self.client.list_objects_v2(Bucket=awsClient.BUCKET_NAME)
         for file_object in file_objects["Contents"]:
-            print(file_object["Key"])
+            # Check for URL format : Object Key Trimming.
+            file_object['URL'] = awsClient.CDN_URL + file_object['Key']
+            file_list.update({file_object['Key']: file_object})
+        return file_list
+
+"""if __name__ == "__main__":
+    aws = awsClient('s3')
+    files = aws.list_files()"""

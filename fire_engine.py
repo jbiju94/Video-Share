@@ -1,12 +1,14 @@
 from flask import Flask, render_template
-from awsClient import awsClient as aws
+from awsClient import awsClient
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def homepage():
-    return render_template('index.html')
+    aws = awsClient('s3')
+    videos = aws.list_files()
+    return render_template('index.html', videos=videos)
 
 
 @app.route("/listAllVideos")
