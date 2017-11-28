@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Video Share</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!-- bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- Custom Theme files -->
+	<link href="{{ url_for('static', filename='css/style.css') }}" rel='stylesheet' type='text/css' media="all" />
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!--start-smoth-scrolling-->
+	<script type="text/javascript" src="{{ url_for('static', filename='js/modernizr.custom.min.js') }}"></script>
+	<link href="{{ url_for('static', filename='css/popuo-box.css') }}" rel="stylesheet" type="text/css" media="all" />
+	<script src="{{ url_for('static', filename='js/jquery.magnific-popup.js') }}" type="text/javascript"></script>
+	<!-- fonts -->
+	<link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+	<link href='//fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+	<!-- //fonts -->
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="index.html">
+					<h1><img src="images/logo.png" alt="" /></h1>
+				</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<div class="top-search">
+					<form class="navbar-form navbar-right">
+						<input type="text" class="form-control" placeholder="Search...">
+						<input type="submit" value=" ">
+					</form>
+				</div>
+				<div class="header-top-right">
+					<div class="file">
+						<a href="upload.html">Upload</a>
+					</div>
+					<div class="signin">
+						<a href="#small-dialog2" class="play-icon popup-with-zoom-anim">Sign Up</a>
+						<div id="small-dialog2" class="mfp-hide">
+							<h3>SignUp</h3>
+							<div class="signup">
+								<form>
+									<input type="text" class="email" placeholder="Email" required="required" pattern="([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?" title="Enter a valid email"/>
+									<input type="password" placeholder="Password" required="required" pattern=".{6,}" title="Minimum 6 characters required" autocomplete="off" />
+									<input type="text" class="email" placeholder="Mobile Number" maxlength="10" pattern="[1-9]{1}\d{9}" title="Enter a valid mobile number" />
+									<input type="submit"  value="Sign Up"/>
+								</form>
+							</div>
+							<div class="clearfix"> </div>
+						</div>	
+					</div>
+					<div class="signin">
+						<a href="#small-dialog" class="play-icon popup-with-zoom-anim">Sign In</a>
+						<div id="small-dialog" class="mfp-hide">
+							<h3>Login</h3>
+							<div class="signup">
+								<form>
+									<input type="text" class="email" placeholder="Enter email / mobile" required="required" pattern="([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?"/>
+									<input type="password" placeholder="Password" required="required" pattern=".{6,}" title="Minimum 6 characters required" autocomplete="off" />
+									<input type="submit"  value="LOGIN"/>
+								</form>
+								<div class="forgot">
+									<a href="#">Forgot password ?</a>
+								</div>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</nav>
+	<div>
+		<div class="col-md-12">
+			<div class="main-grids">
+				<div class="recommended">
+					<div class="recommended-grids">
+						<div class="recommended-info">
+							<h3>Videos</h3>
+						</div>
+						<div  id="top" class="callbacks_container">
+							<ul class="rslides" id="slider3">
+								<li>
+									<div class="animated-grids">
+										<div class="col-md-3 resent-grid recommended-grid slider-first" style="padding-top: 12px;">
+											<div class="resent-grid-img recommended-grid-img">
+												<a href="single.html"><img src="{{ url_for('static', filename='images/c.jpg') }}" alt="" /></a>
+												<div class="time small-time slider-time">
+													<p>5:12</p>
+												</div>
+												<div class="clck small-clck">
+													<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+												</div>
+											</div>
+											<div class="resent-grid-info recommended-grid-info">
+												<h5><a href="single.html" class="title">Nullam interdum metus viverra nullam varius sit sed viverra</a></h5>
+												<div class="slid-bottom-grids">
+													<div class="slid-bottom-grid">
+														<p class="author author-info"><a href="#" class="author">John Maniya</a></p>
+													</div>
+													<div class="slid-bottom-grid slid-bottom-right">
+														<p class="views views-info">1,14,200 views</p>
+													</div>
+													<div class="clearfix"> </div>
+												</div>
+											</div>
+										</div>
+										<div class="clearfix"> </div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/responsiveslides.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="application/x-javascript"> 
+		addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+		$(document).ready(function() {
+			$('.popup-with-zoom-anim').magnificPopup({
+				type: 'inline',
+				fixedContentPos: false,
+				fixedBgPos: true,
+				overflowY: 'auto',
+				closeBtnInside: true,
+				preloader: false,
+				midClick: true,
+				removalDelay: 300,
+				mainClass: 'my-mfp-zoom-in'
+			});
+
+		});
+	</script>
+</body>
+</html>
