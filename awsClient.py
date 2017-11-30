@@ -1,11 +1,12 @@
 import boto3
 import botocore
+import datetime
 
 
 class awsClient:
     BUCKET_NAME = "bitsassignment"
-    ACCESS_KEY = "AKIAIL3LLGV7C4BUGL6A1234"
-    SECRET_KEY = "q5dHkyOx6GRV4MbcD1QVWnrTf8nDO8+cikdHz5iq1234"
+    ACCESS_KEY = "*******"
+    SECRET_KEY = "********"
     REGION = "us-east-1"
     CDN_URL = "https://d1vmo6aju6p6pp.cloudfront.net/"
 
@@ -17,8 +18,11 @@ class awsClient:
             aws_secret_access_key=awsClient.SECRET_KEY
         )
 
-    def upload_file(self, file_name, file_title):
-        self.client.upload_file(file_name, awsClient.BUCKET_NAME, file_title)
+    def upload_file(self, file_object, acl="public-read"):
+        self.client.upload_fileobj(file_object, awsClient.BUCKET_NAME, file_object.filename, ExtraArgs={
+                "ACL": acl,
+                "ContentType": file_object.content_type
+            })
 
     def download_files(self, file_key, file_name):
         try:
@@ -35,8 +39,25 @@ class awsClient:
         for file_object in file_objects["Contents"]:
             # Check for URL format : Object Key Trimming.
             file_object['URL'] = awsClient.CDN_URL + file_object['Key']
+            file_object['Name'] = file_object['Key'].split('.')[0]
             file_list.update({file_object['Key']: file_object})
         return file_list
+
+    def get_file_details(self, file_key):
+        file_details = dict()
+        response = dict()
+        file_object = self.client.get_object(Bucket=awsClient.BUCKET_NAME, Key=file_key)
+        file_details['Key'] = file_key
+        file_details['URL'] = awsClient.CDN_URL + file_key
+        file_details['Name'] = file_key.split('.')[0]
+        file_details['ContentType'] = file_object['ContentType']
+        file_details['UploadedOn'] = file_object['LastModified'].strftime("%B %d, %Y")
+        response.update({0: file_details})
+        return response
+
+    def delete_file(self, file_key):
+        resp = self.client.delete_object(Bucket=awsClient.BUCKET_NAME, Key=file_key)
+        return resp['ResponseMetadata']['HTTPStatusCode']
 
 """if __name__ == "__main__":
     aws = awsClient('s3')

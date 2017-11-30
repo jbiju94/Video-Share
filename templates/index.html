@@ -37,9 +37,14 @@
                 </form>
             </div>
             <div class="header-top-right">
+                <!--<form action="http://127.0.0.1:5000/uploadVideo" id="idVideoUploadForm1" method="POST"
+                      enctype="multipart/form-data">
+                    <input type="file" class="email" name="file" id="idVideoUploadField1" accept="video/*" required/>
+                </form>
                 <div class="file">
-                    <a href="upload.html">Upload</a>
-                </div>
+
+                    <a href="#" id="idVideoUploadButton1">Upload</a>
+                </div>-->
                 <div class="signin">
                     <a href="#small-dialog2" class="play-icon popup-with-zoom-anim">Sign Up</a>
                     <div id="small-dialog2" class="mfp-hide">
@@ -84,38 +89,104 @@
     </div>
 </nav>
 <div>
-    <div class="col-md-12">
+    <div class="col-md-2 sidebar">
+        <div class="top-navigation">
+            <div class="t-menu">MENU</div>
+            <div class="t-img">
+                <img src="{{ url_for('static', filename='images/lines.png') }}" alt="" />
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="drop-navigation drop-navigation">
+            <div id="idDetailsPanel">
+                <h5>DETAILS</h5>
+                <hr>
+                <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <td>Name:</td>
+                        <td id="idNameText"></td>
+                    </tr>
+                    <tr>
+                        <td>Format:</td>
+                        <td id="idExtensionText"></td>
+                    </tr>
+                    <tr>
+                        <td>Content Type:</td>
+                        <td id="idContentTypeText"></td>
+                    </tr>
+                    <tr>
+                        <td>Uploaded On:</td>
+                        <td id="idUploadedOnText"></td>
+                    </tr>
+                    <tr>
+                        <td>URL:</td>
+                        <td ><a href="" id="idURLText">link</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="side-bottom-icons">
+                    <ul class="nav2">
+                        <li id="idShareBtnOuter" ><a href="#" id="idShareBtn" class="glyphicon glyphicon-share">Share</a></li>
+                        <li id="idDeleteBtnOuter"><a href="#" id="idDeleteBtn" class="glyphicon glyphicon-remove">Remove</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="side-bottom">
+                <div class="side-bottom-icons">
+                    <h5>UPLOAD VIDEO</h5>
+                    <hr>
+                    <ul class="nav2">
+                        <li>
+                            <form action="http://127.0.0.1:5000/uploadVideo" id="idVideoUploadForm" method="POST"
+                                  enctype="multipart/form-data">
+                                <input type="file" class="email" name="file" id="idVideoUploadField" accept="video/*" required/>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                <button id="idVideoUploadButton" class="uploadBtn"><span class="glyphicon glyphicon-upload"></span>  UPLOAD</button>
+                <div class="copyright">
+                    <p>Copyright © 2015 My Play. All Rights Reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <div class="main-grids">
             <div class="recommended">
                 <div class="recommended-grids">
                     <div class="recommended-info">
-                        <h3>Animated Cartoon</h3>
+                        <h3>Videos</h3>
                     </div>
-                    <div  id="top" class="callbacks_container">
+                    <div id="top" class="callbacks_container">
                         <ul class="rslides" id="slider3">
                             <li>
                                 <div class="animated-grids">
                                     {% for id, video in videos.iteritems() %}
-                                    <div class="col-md-2" style="margin-top: 20px; margin-left: 20px">
-                                        <div class="row">
-                                            <div class="resent-grid-img recommended-grid-img">
-                                                <a href="{{video['URL']}}"><img src="{{ url_for('static', filename='images/c3.jpg') }}" alt="" /></a>
+                                    <div class="col-md-2 videoGrids" style="margin-top: 20px; margin-left: 20px">
+                                        <a href="/video/get/{{video['Key']}}">
+                                            <div class="row">
+                                                <div class="resent-grid-img recommended-grid-img">
+                                                    <img src="{{ url_for('static', filename='images/c3.jpg') }}" alt=""/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="resent-grid-info recommended-grid-info">
-                                                <h5><a href="{{video['URL']}}" class="title">{{video['Key']}}</a></h5>
-                                                <!--<div class="slid-bottom-grids">
-                                                    <div class="slid-bottom-grid">
-                                                        <p class="author author-info"><a href="#" class="author">John Maniya</a></p>
-                                                    </div>
-                                                    <div class="slid-bottom-grid slid-bottom-right">
-                                                        <p class="views views-info">2,114,200 views</p>
-                                                    </div>
-                                                </div>-->
+                                            <div class="row">
+                                                <div class="resent-grid-info recommended-grid-info">
+                                                    <h5>{{video['Name']}}</h5>
+                                                    <!--<div class="slid-bottom-grids">
+                                                        <div class="slid-bottom-grid">
+                                                            <p class="author author-info"><a href="#" class="author">John Maniya</a></p>
+                                                        </div>
+                                                        <div class="slid-bottom-grid slid-bottom-right">
+                                                            <p class="views views-info">2,114,200 views</p>
+                                                        </div>
+                                                    </div>-->
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="clearfix"> </div>
+                                        </a>
+                                        <div class="clearfix"></div>
                                     </div>
                                     {% endfor %}
                                 </div>
@@ -127,11 +198,12 @@
         </div>
     </div>
 </div>
-<script src="js/responsiveslides.min.js"></script>
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="application/x-javascript">
 		addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
 		$(document).ready(function() {
+			$('#idDetailsPanel').hide();
 			$('.popup-with-zoom-anim').magnificPopup({
 				type: 'inline',
 				fixedContentPos: false,
@@ -145,6 +217,46 @@
 			});
 
 		});
+		$('#idVideoUploadButton').click(function(event) {
+		    supportedFormat=['AVI','MP4','MOV'];
+		    event.preventDefault();
+		    videoFile = $('#idVideoUploadField').val();
+		    if(videoFile){
+		        videoFileParts = videoFile.split(".");
+		        videoFormat = videoFileParts[videoFileParts.length -1]
+		        if(supportedFormat.indexOf(videoFormat.toUpperCase())!= -1 ){
+		            $('#idVideoUploadForm').submit();
+		        }
+		        else{
+		            alert("Unsupported video format.");
+		        }
+		    }
+		    else{
+		        alert("No file Selected.");
+            }
+		});
+
+		$('.videoGrids').click(function(event) {
+		    event.preventDefault();
+
+		    $.ajax({
+                url: $(this).children()[0].href,
+                cache: false,
+                success: function(r){
+                    var fileObject = $.parseJSON(r)[0];
+                    var fileKey = fileObject.Name +"."+ fileObject.Key.split(".")[1];
+                    $('#idNameText').html(fileObject.Name);
+                    $('#idURLText').attr('href',fileObject.URL);
+                    $('#idContentTypeText').html(fileObject.ContentType);
+                    $('#idExtensionText').html(fileObject.Key.split(".")[1]);
+                    $('#idUploadedOnText').html(fileObject.UploadedOn);
+                    $('#idDetailsPanel').show("slow","swing");
+                    $('#idDeleteBtn').attr('href','/video/delete/'+fileKey);
+                }
+            });
+
+		});
+
 
 </script>
 </body>
